@@ -4,3 +4,6 @@ PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
 PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
 PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
 PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
+PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
+PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
+ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.

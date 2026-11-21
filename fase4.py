@@ -292,9 +292,10 @@ if __name__ == "__main__":
 
     try:
         # Creamos un cliente
+        
         mi_cliente = Cliente("C001", "Luis", "luis@correo.com")
         print(mi_cliente.mostrar_detalles())
-        
+        mi_cliente.set_correo("luis_sin_arroba.com")
         # Intentamos ponerle un correo malo para ver si nuestra excepción funciona
 
         # Creamos una sala y calculamos su costo (ej. 2 horas a 50000 la hora)
