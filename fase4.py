@@ -205,7 +205,6 @@ class Reserva:
             f"cantidad {self.cantidad}, total ${self.total:.2f}."
         )
 
-
 # Pequeña prueba para ver que el Log funciona
 if __name__ == "__main__":
     print("realizo el archivo de prueba de log")
@@ -239,8 +238,6 @@ class Cliente(EntidadGeneral):
     def mostrar_detalles(self):
         return f"Cliente: {self.__nombre} (ID: {self.id_codigo}) - Correo: {self.__correo}"
 
-
-
 # SERVICIO 1: Salas
 class ReservaSala(Servicio):
     def __init__(self, id_codigo, nombre_servicio, precio_base, capacidad):
@@ -255,7 +252,6 @@ class ReservaSala(Servicio):
         
     def mostrar_detalles(self):
         return f"Sala: {self.nombre_servicio} (Capacidad: {self.capacidad} pers.)"
-
 
 # SERVICIO 2: Equipos
 class AlquilerEquipo(Servicio):
@@ -273,7 +269,6 @@ class AlquilerEquipo(Servicio):
     def mostrar_detalles(self):
         return f"Equipo: {self.nombre_servicio} ({self.tipo_equipo})"
 
-
 # SERVICIO 3: Asesorías
 class Asesoria(Servicio):
     def __init__(self, id_codigo, nombre_servicio, precio_base, experto):
@@ -286,7 +281,6 @@ class Asesoria(Servicio):
         
     def mostrar_detalles(self):
         return f"Asesoría: {self.nombre_servicio} - Impartida por: {self.experto}"
-
 
 if __name__ == "__main__":
 
@@ -307,3 +301,89 @@ if __name__ == "__main__":
     except ErrorSoftwareFJ as error:
         print(f"Ocurrió un error en el sistema: {error}")
         guardar_log(f"ERROR para commit 2: {error}")
+
+class Reserva:
+    def __init__(self, id_reserva, cliente, servicio, tiempo):
+
+        self.id_reserva = id_reserva
+        self.cliente = cliente
+        self.servicio = servicio
+        self.tiempo = tiempo
+        self.estado = "Pendiente" # Estados: Pendiente, Confirmada, Cancelada
+        self.costo_total = 0.0
+
+    def confirmar_reserva(self):
+        
+        """Confirma la reserva pero primero hace validaciones estrictas."""
+        
+        # Validación 1: ¿El servicio está disponible?
+        if not self.servicio.esta_disponible:
+            # Aquí usamos el error que creamos en el Día 1
+            mensaje = f"Error: El servicio {self.servicio.nombre_servicio} no está disponible."
+            guardar_log(f"FALLO DE RESERVA - {mensaje}")
+            raise ErrorNoDisponible(mensaje)
+
+        # Si pasamos la validación, calculamos el costo y ocupamos el servicio
+        self.costo_total = self.servicio.calcular_costo_total(self.tiempo)
+        self.servicio.esta_disponible = False # Lo marcamos como ocupado
+        self.estado = "Confirmada"
+        
+        # Guardamos en el archivo de texto que todo salió bien
+        log_msg = (f"Reserva {self.id_reserva} CONFIRMADA - "
+                   f"Cliente: {self.cliente.get_nombre()} - "
+                   f"Servicio: {self.servicio.nombre_servicio} - "
+                   f"Total: ${self.costo_total}")
+        guardar_log(log_msg)
+        return log_msg
+
+    def cancelar_reserva(self, motivo_cancelacion=None):
+        """
+        Cancela la reserva. Si no se pasa un motivo, asume "Sin especificar".
+        """
+        if self.estado == "Cancelada":
+            raise ErrorSoftwareFJ(f"La reserva {self.id_reserva} ya estaba cancelada.")
+            
+        self.estado = "Cancelada"
+        self.servicio.esta_disponible = True # Volvemos a liberar el servicio
+        
+        # Aquí decidimos qué mensaje guardar dependiendo de si nos dieron un motivo o no
+        if motivo_cancelacion is None:
+            razon = "Sin especificar"
+        else:
+            razon = motivo_cancelacion
+            
+        mensaje = f"Reserva {self.id_reserva} CANCELADA. Motivo: {razon}"
+        guardar_log(mensaje)
+        return mensaje
+
+    def mostrar_reserva(self):
+        return (f"Reserva [{self.id_reserva}] | Estado: {self.estado} | "
+                f"{self.cliente.get_nombre()} reservó {self.servicio.nombre_servicio}")
+
+if __name__ == "__main__":
+    print("\nmi 4 commit de reserva con error")
+    try:
+        # 1. Usamos el cliente y la sala
+        cliente1 = Cliente("C002", "Ana", "ana@correo.com")
+        sala1 = ReservaSala("S002", "Sala VIP", 100000, 5)
+        
+        # 2. Creamos la reserva (Ana reserva la sala por 3 horas)
+        reserva1 = Reserva("R001", cliente1, sala1, 3)
+        print(reserva1.mostrar_reserva())
+        
+        # 3. Confirmamos la reserva (esto calcula el costo y la marca ocupada)
+        print(reserva1.confirmar_reserva())
+        
+        # 4. Probamos el manejo de errores:
+        # Intentamos que OTRO cliente reserve la MISMA sala que ya ocupó Ana
+        cliente2 = Cliente("C003", "Carlos", "carlos@correo.com")
+        reserva_fallida = Reserva("R002", cliente2, sala1, 2)
+        
+        print("\nIntentando reservar una sala ocupada...")
+        reserva_fallida.confirmar_reserva() # ¡Esto va a lanzar el ErrorNoDisponible!
+
+    except ErrorSoftwareFJ as error:
+        # Atrapamos nuestro error personalizado
+        print(f"-> el sistema bloqueo la accion: {error}")
+        
+    print("\nRevisa tu archivo 'registro_errores.txt' para ver los movimientos.")

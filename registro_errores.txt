@@ -7,3 +7,27 @@ PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
 PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
 PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
 ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
+PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
+ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
+Reserva R001 CONFIRMADA - Cliente: Ana - Servicio: Sala VIP - Total: $330000.0
+FALLO DE RESERVA - Error: El servicio Sala VIP no está disponible.
+PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
+ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
+Reserva R001 CONFIRMADA - Cliente: Ana - Servicio: Sala VIP - Total: $330000.0
+FALLO DE RESERVA - Error: El servicio Sala VIP no está disponible.
+PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
+ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
+Reserva R001 CONFIRMADA - Cliente: Ana - Servicio: Sala VIP - Total: $330000.0
+FALLO DE RESERVA - Error: El servicio Sala VIP no está disponible.
+PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
+ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
+Reserva R002 CONFIRMADA - Cliente: Ana - Servicio: Sala VIP - Total: $330000.0
+FALLO DE RESERVA - Error: El servicio Sala VIP no está disponible.
+PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
+ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
+Reserva R005 CONFIRMADA - Cliente: Ana - Servicio: Sala VIP - Total: $330000.0
+FALLO DE RESERVA - Error: El servicio Sala VIP no está disponible.
+PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
+ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
+Reserva R001 CONFIRMADA - Cliente: Ana - Servicio: Sala VIP - Total: $330000.0
+FALLO DE RESERVA - Error: El servicio Sala VIP no está disponible.
