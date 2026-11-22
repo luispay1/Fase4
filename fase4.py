@@ -387,3 +387,91 @@ if __name__ == "__main__":
         print(f"-> el sistema bloqueo la accion: {error}")
         
     print("\nRevisa tu archivo 'registro_errores.txt' para ver los movimientos.")
+
+class GestorSoftwareFJ:
+    def __init__(self):
+        # Aquí guardaremos nuestros objetos en memoria (sin bases de datos)
+        self.lista_clientes = []
+        self.lista_servicios = []
+        self.lista_reservas = []
+
+    def registrar_cliente(self, cliente):
+        """Añade un objeto Cliente a la lista interna."""
+        self.lista_clientes.append(cliente)
+        guardar_log(f"Cliente registrado: {cliente.get_nombre()}")
+
+    def registrar_servicio(self, servicio):
+        """Añade un objeto Servicio a la lista interna."""
+        self.lista_servicios.append(servicio)
+        guardar_log(f"Servicio registrado: {servicio.nombre_servicio}")
+
+    def buscar_cliente(self, id_buscar):
+        """
+        Busca un cliente por su ID en la lista.
+        Utiliza try/except/else/finally para demostrar manejo avanzado de errores.
+        """
+        print(f"\n--- Iniciando búsqueda del cliente ID: {id_buscar} ---")
+        cliente_encontrado = None
+
+        try:
+            # TRY: Intentamos buscar
+            # Si el ID buscar está vacío o no es texto, forzamos un error
+            if not id_buscar or not isinstance(id_buscar, str):
+                raise ErrorDatoInvalido("El ID de búsqueda debe ser un texto válido.")
+
+            # Recorremos la lista buscando el ID
+            for cliente in self.lista_clientes:
+                if cliente.id_codigo == id_buscar:
+                    cliente_encontrado = cliente
+                    break # Lo encontramos, rompemos el ciclo
+            
+            # Si terminamos de buscar y no lo encontramos, lanzamos un error general
+            if cliente_encontrado is None:
+                raise ErrorSoftwareFJ(f"No se encontró ningún cliente con el ID {id_buscar}.")
+
+        except ErrorDatoInvalido as e_dato:
+            # EXCEPT 1: Atrapa nuestro error de datos inválidos
+            mensaje = f"Error de formato al buscar: {e_dato}"
+            print(mensaje)
+            guardar_log(mensaje)
+
+        except ErrorSoftwareFJ as e_sistema:
+            # EXCEPT 2: Atrapa nuestro error de "no encontrado"
+            mensaje = f"Error de búsqueda: {e_sistema}"
+            print(mensaje)
+            guardar_log(mensaje)
+            
+        except Exception as e_inesperado:
+            # EXCEPT 3: Atrapa CUALQUIER otro error raro que no hayamos previsto
+            mensaje = f"Error inesperado durante la búsqueda: {e_inesperado}"
+            print(mensaje)
+            guardar_log(mensaje)
+
+        else:
+            # ELSE: Se ejecuta SOLO si el bloque 'try' terminó SIN NINGÚN ERROR
+            print(f"¡Éxito! Cliente encontrado: {cliente_encontrado.get_nombre()}")
+            return cliente_encontrado
+
+        finally:
+            # FINALLY: Se ejecuta SIEMPRE, haya fallado o no.
+            print("Finalizando proceso de búsqueda en el sistema.")
+
+if __name__ == "__main__":
+    print("\n---este es el manejo de listas internas ---")
+    gestor = GestorSoftwareFJ()
+    
+    # Creamos y registramos un cliente
+    cliente_prueba = Cliente("C100", "Pedro", "pedro@correo.com")
+    gestor.registrar_cliente(cliente_prueba)
+    
+    # Prueba 1: Búsqueda exitosa (activará el ELSE)
+    print("\nPrueba 1: Buscar cliente que SI existe")
+    resultado1 = gestor.buscar_cliente("C100")
+    
+    # Prueba 2: Búsqueda fallida (activará el EXCEPT de ErrorSoftwareFJ)
+    print("\nPrueba 2: Buscar cliente que NO existe")
+    resultado2 = gestor.buscar_cliente("C999")
+    
+    # Prueba 3: Error provocado (activará el EXCEPT de ErrorDatoInvalido)
+    print("\nPrueba 3: Buscar con un ID inválido (un número en vez de texto)")
+    resultado3 = gestor.buscar_cliente(12345)
