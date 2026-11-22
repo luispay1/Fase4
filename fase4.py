@@ -475,3 +475,107 @@ if __name__ == "__main__":
     # Prueba 3: Error provocado (activará el EXCEPT de ErrorDatoInvalido)
     print("\nPrueba 3: Buscar con un ID inválido (un número en vez de texto)")
     resultado3 = gestor.buscar_cliente(12345)
+
+def ejecutar_simulacion():
+    print("\n" + "="*50)
+    print("SOFTWARE FJ")
+    print("="*50)
+    
+    # inicio el gestor central
+    gestor = GestorSoftwareFJ()
+    # ---------------------------------------------------------
+    # OPERACIÓN 1: Registro válido de cliente
+    print("\n[Operación 1] Registrando cliente válido...")
+    cliente1 = Cliente("C001", "Diana", "diana@correo.com")
+    gestor.registrar_cliente(cliente1)
+    print("-> OK: Cliente Diana registrada.")
+    # ---------------------------------------------------------
+    # OPERACIÓN 2: Registro inválido de cliente (Fallo provocado)
+    print("\n[Operación 2] Intentando modificar correo inválido (sin @)...")
+    try:
+        cliente_error = Cliente("C002", "Javier", "javiercorreo.com")
+        cliente_error.set_correo("javiercorreo.com") # Aquí estalla
+    except ErrorDatoInvalido as e:
+        print(f"-> OK MANEJO DE ERROR: {e}")
+        guardar_log(f"Fallo Operación 2: {e}")
+
+    # OPERACIÓN 3: Creación correcta de un servicio (Sala)
+    print("\n[Operación 3] Creando servicio válido (Sala)...")
+    sala1 = ReservaSala("S001", "Sala de Conferencias B", 60000, 20)
+    gestor.registrar_servicio(sala1)
+    print("-> OK: Sala de Conferencias B registrada.")
+
+    # OPERACIÓN 4: Creación correcta de un servicio (Equipo)
+    print("\n[Operación 4] Creando servicio válido (Equipo)...")
+    equipo1 = AlquilerEquipo("E001", "Proyector 4K", 30000, "Audiovisual")
+    gestor.registrar_servicio(equipo1)
+    print("-> OK: Proyector 4K registrado.")
+    
+    # OPERACIÓN 5: Búsqueda exitosa usando try/except/else/finally
+    print("\n[Operación 5] Buscando cliente existente en el gestor...")
+    cliente_encontrado = gestor.buscar_cliente("C001")
+    # No imprimimos OK aquí porque el método buscar_cliente ya imprime sus mensajes
+    # OPERACIÓN 6: Reserva exitosa (Diana reserva la Sala)
+    print("\n[Operación 6] Realizando reserva exitosa...")
+    try:
+        # Reserva por 4 horas
+        reserva1 = Reserva("R001", cliente1, sala1, 4)
+        mensaje_res = reserva1.confirmar_reserva()
+        gestor.lista_reservas.append(reserva1)
+        print(f"-> OK: {mensaje_res}")
+    except Exception as e:
+        print(f"Error inesperado: {e}")
+
+    # OPERACIÓN 7: Reserva fallida (Servicio no disponible)
+    print("\n[Operación 7] Intentando reservar un servicio ya ocupado...")
+    try:
+        # Intentamos que Diana reserve la MISMA sala que ya está confirmada y ocupada
+        reserva2 = Reserva("R002", cliente1, sala1, 2)
+        reserva2.confirmar_reserva() 
+    except ErrorNoDisponible as e:
+        print(f"-> OK MANEJO DE ERROR: {e}")
+        guardar_log(f"Fallo Operación 7: {e}")
+
+    # OPERACIÓN 8: Cancelación de reserva sin motivo (Sobrecarga simulada 1)
+    print("\n[Operación 8] Cancelando reserva SIN motivo (simulación sobrecarga)...")
+    try:
+        msg_cancela1 = reserva1.cancelar_reserva()
+        print(f"-> OK: {msg_cancela1}")
+    except Exception as e:
+        print(f"Error: {e}")
+
+    # OPERACIÓN 9: Cancelación de reserva CON motivo (Sobrecarga simulada 2)
+    print("\n[Operación 9] Cancelando reserva CON motivo (simulación sobrecarga)...")
+    try:
+        # Primero volvemos a confirmar la reserva para poder cancelarla (está liberada)
+        reserva1.confirmar_reserva()
+        # Ahora la cancelamos pasando el parámetro opcional
+        msg_cancela2 = reserva1.cancelar_reserva("Cambio de fecha por parte del cliente")
+        print(f"-> OK: {msg_cancela2}")
+    except Exception as e:
+        print(f"Error: {e}")
+
+    # OPERACIÓN 10: Intento de cancelar una reserva ya cancelada
+    print("\n[Operación 10] Intentando cancelar una reserva que ya está cancelada...")
+    try:
+        reserva1.cancelar_reserva() # Va a estallar porque acabamos de cancelarla en el paso 9
+    except ErrorSoftwareFJ as e:
+        print(f"-> OK MANEJO DE ERROR: {e}")
+        guardar_log(f"Fallo Operación 10: {e}")
+
+    print("\n" + "="*50)
+    print("SIMULACIÓN FINALIZADA. El programa NO se cerró abruptamente.")
+    print("Revise el archivo 'registro_errores.txt' finnnnnnnnnnnnnn.")
+    print("="*50)
+
+# PUNTO DE ENTRADA DEL PROGRAMA
+
+if __name__ == "__main__":
+    # Creamos/limpiamos el log al inicio de la ejecución final para empezar fresco
+    try:
+        with open("registro_errores.txt", "w", encoding="utf-8") as f:
+            f.write("=== INICIO DE LOG DEL SISTEMA SOFTWARE FJ ===\n")
+    except Exception:
+        pass
+        
+    ejecutar_simulacion()

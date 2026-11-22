@@ -1,58 +1,12 @@
-PRIMERAS PRUEBAS - Se han cargado las clases base.
-PRIMERAS PRUEBAS - Se han cargado las clases base.
-PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
-PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
-PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
-PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
-PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
-PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
-ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
-PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
-ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
-Reserva R001 CONFIRMADA - Cliente: Ana - Servicio: Sala VIP - Total: $330000.0
-FALLO DE RESERVA - Error: El servicio Sala VIP no está disponible.
-PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
-ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
-Reserva R001 CONFIRMADA - Cliente: Ana - Servicio: Sala VIP - Total: $330000.0
-FALLO DE RESERVA - Error: El servicio Sala VIP no está disponible.
-PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
-ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
-Reserva R001 CONFIRMADA - Cliente: Ana - Servicio: Sala VIP - Total: $330000.0
-FALLO DE RESERVA - Error: El servicio Sala VIP no está disponible.
-PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
-ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
-Reserva R002 CONFIRMADA - Cliente: Ana - Servicio: Sala VIP - Total: $330000.0
-FALLO DE RESERVA - Error: El servicio Sala VIP no está disponible.
-PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
-ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
-Reserva R005 CONFIRMADA - Cliente: Ana - Servicio: Sala VIP - Total: $330000.0
-FALLO DE RESERVA - Error: El servicio Sala VIP no está disponible.
-PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
-ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
-Reserva R001 CONFIRMADA - Cliente: Ana - Servicio: Sala VIP - Total: $330000.0
-FALLO DE RESERVA - Error: El servicio Sala VIP no está disponible.
-PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
-ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
-Reserva R001 CONFIRMADA - Cliente: Ana - Servicio: Sala VIP - Total: $330000.0
-FALLO DE RESERVA - Error: El servicio Sala VIP no está disponible.
-PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
-ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
-Reserva R001 CONFIRMADA - Cliente: Ana - Servicio: Sala VIP - Total: $330000.0
-FALLO DE RESERVA - Error: El servicio Sala VIP no está disponible.
-Cliente registrado: Pedro
-Error de búsqueda: No se encontró ningún cliente con el ID C999.
-Error de formato al buscar: El ID de búsqueda debe ser un texto válido.
-PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
-ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
-Reserva R001 CONFIRMADA - Cliente: Ana - Servicio: Sala VIP - Total: $330000.0
-FALLO DE RESERVA - Error: El servicio Sala VIP no está disponible.
-Cliente registrado: Pedro
-Error de búsqueda: No se encontró ningún cliente con el ID C999.
-Error de formato al buscar: El ID de búsqueda debe ser un texto válido.
-PRIMERAS PRUEBAS - Se han cargado las clases base correctamente
-ERROR para commit 2: El correo 'luis_sin_arroba.com' no es válido. Falta el @.
-Reserva R001 CONFIRMADA - Cliente: Ana - Servicio: Sala VIP - Total: $330000.0
-FALLO DE RESERVA - Error: El servicio Sala VIP no está disponible.
-Cliente registrado: Pedro
-Error de búsqueda: No se encontró ningún cliente con el ID C999.
-Error de formato al buscar: El ID de búsqueda debe ser un texto válido.
+=== INICIO DE LOG DEL SISTEMA SOFTWARE FJ ===
+Cliente registrado: Diana
+Fallo Operación 2: El correo 'javiercorreo.com' no es válido. Falta el @.
+Servicio registrado: Sala de Conferencias B
+Servicio registrado: Proyector 4K
+Reserva R001 CONFIRMADA - Cliente: Diana - Servicio: Sala de Conferencias B - Total: $264000.0
+FALLO DE RESERVA - Error: El servicio Sala de Conferencias B no está disponible.
+Fallo Operación 7: Error: El servicio Sala de Conferencias B no está disponible.
+Reserva R001 CANCELADA. Motivo: Sin especificar
+Reserva R001 CONFIRMADA - Cliente: Diana - Servicio: Sala de Conferencias B - Total: $264000.0
+Reserva R001 CANCELADA. Motivo: Cambio de fecha por parte del cliente
+Fallo Operación 10: La reserva R001 ya estaba cancelada.
